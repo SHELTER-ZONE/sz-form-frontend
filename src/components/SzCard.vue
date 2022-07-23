@@ -1,6 +1,6 @@
 <template>
-  <n-grid class="card my-12px" x:gap="12" :cols="4">
-    <n-grid-item class="m-auto heading-icon" span="1">
+  <n-grid class="card" x:gap="12" :cols="4">
+    <n-grid-item class="heading-icon" span="1">
       ㉿
     </n-grid-item>
     <n-grid-item class="py-24px" span="3">
@@ -24,11 +24,11 @@ import { NGrid, NGridItem } from 'naive-ui/es'
   }
 
   .card {
-    @apply rounded-md;
+    @apply rounded-md my-12px text-black;
     background-color:#D9D9D9;
   }
 
   .heading-icon {
-    @apply text-3xl font-normal
+    @apply text-3xl font-normal m-auto;
   }
 </style>

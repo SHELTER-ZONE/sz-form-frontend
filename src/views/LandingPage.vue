@@ -1,7 +1,7 @@
 <template>
   <main class="landing-page">
-    <n-space vertical size="large">
-      <n-layout class="px-30px py-50px">
+    <n-layout class="h-full">
+      <n-space vertical class="px-30px pt-50px pb-75px">
         <h1>
           SZ Form
         </h1>
@@ -18,9 +18,9 @@
         </h2>
         <sz-card class="mt-0" />
         <sz-card />
-      </n-layout>
-      <sz-footer />
-    </n-space>
+      </n-space>
+    </n-layout>
+    <sz-footer />
   </main>
 </template>
 
