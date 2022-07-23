@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider id="app-provider" :theme="darkTheme">
+  <n-config-provider id="app-provider" :theme="lightTheme" :theme-overrides="themeOverrides">
     <n-message-provider>
       <slot />
     </n-message-provider>
@@ -7,7 +7,12 @@
 </template>
 
 <script setup lang="ts">
-import { NConfigProvider, NMessageProvider, darkTheme } from 'naive-ui/es'
+import { NConfigProvider, NMessageProvider, lightTheme, GlobalThemeOverrides } from 'naive-ui/es'
+const themeOverrides: GlobalThemeOverrides = {
+  common: {
+    textColor2: "#000000"
+  },
+}
 </script>
 
 <style scoped lang="postcss">
