@@ -15,20 +15,15 @@ import { NGrid, NGridItem } from 'naive-ui/es'
 </script>
 
 <style scoped lang="postcss">
-  h3 {
-    @apply text-base font-medium;
-  }
+.card {
+  @apply my-12px bg-white/10 text-left text-white/82;
+}
 
-  p {
-    @apply text-base font-normal;
-  }
+p {
+  @apply p-0;
+}
 
-  .card {
-    @apply rounded-md my-12px text-black;
-    background-color:#D9D9D9;
-  }
-
-  .heading-icon {
-    @apply text-3xl font-normal m-auto;
-  }
+.heading-icon {
+  @apply text-3xl font-normal m-auto;
+}
 </style>
