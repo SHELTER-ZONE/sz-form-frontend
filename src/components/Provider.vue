@@ -12,6 +12,6 @@ import { NConfigProvider, NMessageProvider, darkTheme } from 'naive-ui/es'
 
 <style scoped lang="postcss">
 #app-provider {
-  @apply h-full w-full;
+  @apply h-full w-full overflow-y-auto;
 }
 </style>

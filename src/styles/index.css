@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+
+html,
+body,
+#app {
+    @apply w-full h-full;
+}
+
+h1 {
+    @apply text-xl font-bold py-12px;
+}
+
+h2 {
+    @apply text-lg font-medium py-12px;
+}
+
+h3 {
+    @apply text-base font-medium;
+}
+
+p {
+  @apply text-base font-normal py-12px;
+}
+
+.page-padding {
+    @apply pb-[75px] w-full;
+}
+
+.common-width {
+    @apply max-w-[500px] min-w-[250px] w-full m-auto;
+    @apply <max: px-[20px];
+}
