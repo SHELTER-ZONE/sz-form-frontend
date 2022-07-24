@@ -16,7 +16,7 @@ import { NGrid, NGridItem } from 'naive-ui/es'
 
 <style scoped lang="postcss">
 .card {
-  @apply my-12px bg-white/10 text-left text-white/82;
+  @apply rounded my-12px bg-white/10 text-left text-white/82 cursor-pointer;
 }
 
 p {

@@ -1,10 +1,10 @@
 <template>
   <main class="page-padding">
     <div class="common-width">
-      <h1>
+      <h1 class="text-left">
         SZ Form
       </h1>
-      <p>
+      <p class="text-left">
         SZ Form Description
       </p>
       <h2>
