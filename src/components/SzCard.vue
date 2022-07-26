@@ -1,13 +1,15 @@
 <template>
-  <n-grid class="card" x:gap="12" :cols="4">
-    <n-grid-item class="heading-icon" span="1">
-      ㉿
-    </n-grid-item>
-    <n-grid-item class="py-24px" span="3">
-      <h3>1day-1knowledge</h3>
-      <p>left: 1d 2h</p>
-    </n-grid-item>
-  </n-grid>
+  <router-link :to="{ name: 'Form' }">
+    <n-grid class="card" x:gap="12" :cols="4">
+      <n-grid-item class="heading-icon" span="1">
+        ㉿
+      </n-grid-item>
+      <n-grid-item class="py-24px" span="3">
+        <h3>1day-1knowledge</h3>
+        <p>left: 1d 2h</p>
+      </n-grid-item>
+    </n-grid>
+  </router-link>
 </template>
 
 <script setup lang="ts">
