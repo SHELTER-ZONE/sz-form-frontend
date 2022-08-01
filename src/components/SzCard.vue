@@ -1,6 +1,6 @@
 <template>
   <router-link :to="{ name: 'Form' }">
-    <n-grid class="card" x:gap="12" :cols="4">
+    <n-grid class="card common-transition" x:gap="12" :cols="4">
       <n-grid-item class="heading-icon" span="1">
         ㉿
       </n-grid-item>
@@ -18,7 +18,8 @@ import { NGrid, NGridItem } from 'naive-ui/es'
 
 <style scoped lang="postcss">
 .card {
-  @apply rounded my-12px bg-white/10 text-left text-white/82 cursor-pointer;
+  @apply border border-transparent rounded my-12px bg-white/10 text-left text-white/82 cursor-pointer;
+  @apply hover:(border border-secondary-1);
 }
 
 p {

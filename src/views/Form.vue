@@ -30,7 +30,6 @@
       <n-button class="my-30px w-full" strong tertiary round type="primary" size="large">
         提交
       </n-button>
-      <sz-footer />
     </div>
   </main>
 </template>
