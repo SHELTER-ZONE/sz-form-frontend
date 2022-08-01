@@ -10,15 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import { Discord as DiscordIcon  } from '@vicons/fa'
-import { defineComponent } from 'vue'
+import { LogoDiscord as DiscordIcon  } from '@vicons/carbon'
 import { NSpace, NIcon } from 'naive-ui/es'
-
-defineComponent({
-  components: {
-    DiscordIcon
-  }
-})
 </script>
 
 <style scoped lang="postcss">

@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import { Close as CloseIcon } from '@vicons/ionicons5'
+import { Close as CloseIcon } from '@vicons/carbon'
 import { NInput, NIcon } from 'naive-ui/es'
-import { defineComponent, defineProps, defineExpose, ref } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
   index: { type: Number, required: true},
@@ -23,12 +23,6 @@ const props = defineProps({
 
 const imageIndex = ref(props.index + 1)
 const imageUrl = ref("")
-
-defineComponent({
-  components: {
-    CloseIcon
-  }
-})
 
 defineExpose({ imageIndex, imageUrl })
 </script>

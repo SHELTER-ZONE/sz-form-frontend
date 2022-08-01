@@ -36,18 +36,12 @@
 </template>
 
 <script setup lang="ts">
-import { Add as AddIcon } from '@vicons/ionicons5'
-import { defineComponent, ref  } from 'vue'
+import { Add as AddIcon } from '@vicons/carbon'
+import { ref  } from 'vue'
 import { NButton, NIcon } from 'naive-ui/es'
 import SzImage from '@/components/SzImage.vue'
 import SzEditor from '@/components/SzEditor.vue'
 import SzFooter from '@/components/SzFooter.vue'
-
-defineComponent({
-  components: {
-    AddIcon
-  }
-})
 
 const szImageIdCounter = ref(0)
 const szImageComponents = ref([] as {
