@@ -10,19 +10,20 @@
 </template>
 
 <script setup lang="ts">
-import { Discord as DiscordIcon  } from '@vicons/fa'
+import { Discord as DiscordIcon } from '@vicons/fa'
 import { defineComponent } from 'vue'
 import { NSpace, NIcon } from 'naive-ui/es'
 
 defineComponent({
   components: {
-    DiscordIcon
-  }
+    DiscordIcon,
+  },
 })
 </script>
 
 <style scoped lang="postcss">
 .footer {
-  @apply fixed w-full left-0 bottom-0 py-30px text-[#63e2b7] h-[75px] bg-[#374859];
+  @apply fixed w-full left-0 bottom-0 py-30px  h-[75px];
+  @apply text-secondary-1 bg-primary-2;
 }
 </style>

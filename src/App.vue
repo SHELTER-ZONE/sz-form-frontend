@@ -19,6 +19,6 @@ body,
   font-family: 'Noto Sans TC', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @apply text-gray-400 bg-szPrimary text-center;
+  @apply text-gray-400 bg-primary-1 text-center;
 }
 </style>
