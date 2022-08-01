@@ -22,9 +22,6 @@ p {
   @apply text-base font-normal py-12px;
 }
 
-.page-padding {
-    @apply pb-[75px] w-full;
-}
 
 .common-width {
     @apply max-w-[500px] min-w-[250px] w-full m-auto;

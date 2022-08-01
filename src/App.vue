@@ -1,11 +1,14 @@
 <template>
-  <Provider>
-    <router-view />
+  <Provider class="flex flex-col">
+    <Navbar />
+    <router-view class="flex-1 common-width !mt-[50px]" />
+    <SzFooter />
   </Provider>
 </template>
 
 <script setup lang="ts">
 import Provider from '@/components/Provider.vue'
+import SzFooter from '@/components/SzFooter.vue'
 </script>
 
 <style lang="postcss">
