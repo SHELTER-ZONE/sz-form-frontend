@@ -23,7 +23,7 @@ defineComponent({
 
 <style scoped lang="postcss">
 .footer {
-  @apply fixed w-full left-0 bottom-0 py-30px  h-[75px];
+  @apply w-full left-0 bottom-0 py-30px  h-[75px] mt-[50px];
   @apply text-secondary-1 bg-primary-2;
 }
 </style>
