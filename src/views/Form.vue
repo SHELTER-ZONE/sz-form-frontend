@@ -11,6 +11,10 @@
         <DCTextEditor />
       </section>
 
+      <section>
+        <CodeBlockInput />
+      </section>
+
       <section class="section-block">
         <p>圖片</p>
         <hr class="divider" />
@@ -61,6 +65,7 @@
 import { Add as AddIcon } from '@vicons/carbon'
 import { NButton, NIcon } from 'naive-ui/es'
 import SzImage from '@/components/SzImage.vue'
+import CodeBlockInput from '@/components/CodeBlockInput.vue'
 import DCTextEditor from '@/components/DCTextEditor.vue'
 import { useDynamicList } from '@/use/dynamicList'
 
