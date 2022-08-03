@@ -4,29 +4,45 @@
       <h1>SZ Form</h1>
       <h2>1day-1knowledge</h2>
       <p>SZ Form Description</p>
-      <DCTextEditor />
-      <sz-image
-        v-for="(item, index) in szImageComponents"
-        :id="item.id"
-        :key="item.index"
-        :ref="(el: InstanceType<typeof SzImage>) => { item.ref = el }"
-        :index="index"
-        :close="removeSzImage"
-      />
-      <n-button
-        v-if="szImageComponents.length < 3"
-        class="my-30px text-gray-400"
-        ghost
-        size="large"
-        @click="addSzImage"
-      >
-        <template #icon>
-          <n-icon>
-            <add-icon />
-          </n-icon>
-        </template>
-        新增圖片
-      </n-button>
+
+      <section class="section-block">
+        <p>內容</p>
+        <hr class="divider" />
+        <DCTextEditor />
+      </section>
+
+      <section class="section-block">
+        <p>圖片</p>
+        <hr class="divider" />
+        <sz-image
+          v-for="item in ImagesList"
+          :key="`img-${item.index}`"
+          v-model:data="item.ref"
+          :index="item.index"
+          @remove="removeImage($event)"
+        />
+
+        <n-button
+          v-if="imagesCount < 3"
+          class="text-gray-400 mt-[10px]"
+          ghost
+          size="large"
+          @click="
+            addImage({
+              index: imagesCount,
+              ref: null,
+            })
+          "
+        >
+          <template #icon>
+            <n-icon>
+              <add-icon />
+            </n-icon>
+          </template>
+          新增圖片
+        </n-button>
+      </section>
+
       <n-button
         class="my-30px w-full"
         strong
@@ -43,43 +59,17 @@
 
 <script setup lang="ts">
 import { Add as AddIcon } from '@vicons/carbon'
-import { ref } from 'vue'
 import { NButton, NIcon } from 'naive-ui/es'
 import SzImage from '@/components/SzImage.vue'
 import DCTextEditor from '@/components/DCTextEditor.vue'
-// import SzEditor from '@/components/SzEditor.vue'
+import { useDynamicList } from '@/use/dynamicList'
 
-const szImageIdCounter = ref(0)
-const szImageComponents = ref(
-  [] as {
-    index: number
-    id: string
-    ref: InstanceType<typeof SzImage>
-  }[]
-)
-
-const addSzImage = async () => {
-  if (szImageComponents.value.length >= 3) {
-    return
-  }
-
-  szImageComponents.value.push({
-    index: szImageComponents.value.length,
-    id: (szImageIdCounter.value++).toString(),
-    ref: null,
-  })
-}
-
-const removeSzImage = async (id: String) => {
-  // Remove selected component
-  szImageComponents.value = szImageComponents.value.filter(
-    (item) => item.id !== id
-  )
-  // Refresh index
-  szImageComponents.value.forEach((item, index) => {
-    item.ref.imageIndex = index + 1
-  })
-}
+const {
+  itemCount: imagesCount,
+  itemList: ImagesList,
+  addItem: addImage,
+  removeItem: removeImage,
+} = useDynamicList({ max: 3 })
 </script>
 
 <style scoped lang="postcss">

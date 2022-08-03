@@ -5,7 +5,7 @@
         <n-input
           v-model:value="content"
           type="textarea"
-          placeholder="Basic Textarea"
+          placeholder="請輸入內容"
           :autosize="{
             minRows: 3,
           }"
