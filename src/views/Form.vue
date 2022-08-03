@@ -13,6 +13,7 @@
 
       <section>
         <CodeBlockInput />
+        <CodeBlockInput />
       </section>
 
       <section class="section-block">

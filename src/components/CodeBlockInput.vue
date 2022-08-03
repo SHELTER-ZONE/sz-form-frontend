@@ -1,53 +1,51 @@
 <template>
-  <n-alert :show-icon="false">
+  <div class="code-block-input">
     <n-select v-model:value="lang" :options="langs" />
-    <div>
-      {{ lang }}
-    </div>
-    <button @click="showEditor = !showEditor">toggle</button>
     <prism-editor
-      v-if="showEditor"
-      class="my-editor"
       v-model="code"
+      class="my-editor"
       :highlight="highlighter"
       line-numbers
-    ></prism-editor>
-  </n-alert>
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { NSelect, NAlert, NInput } from 'naive-ui/es'
+import { ref } from 'vue'
+import { NSelect } from 'naive-ui/es'
 // import Prism Editor
 import { PrismEditor } from 'vue-prism-editor'
 import 'vue-prism-editor/dist/prismeditor.min.css' // import the styles somewhere
 
 // import highlighting library (you can use any library you want just return html string)
 import { highlight, languages } from 'prismjs/components/prism-core'
+import 'prismjs/components/prism-python'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
+import 'prismjs/components/prism-typescript'
+import 'prismjs/components/prism-java'
+import 'prismjs/components/prism-c'
+import 'prismjs/components/prism-cpp'
+import 'prismjs/components/prism-csharp'
+import 'prismjs/components/prism-css'
+import 'prismjs/components/prism-rust'
+import 'prismjs/components/prism-kotlin'
 import 'prismjs/themes/prism-tomorrow.css' // import syntax highlighting styles
 
 const code = ref('')
 const lang = ref('js')
-const a = computed(() => languages)
-const showEditor = ref(false)
 
-const highlighter = (code) => {
+const highlighter = (code: string) => {
   return highlight(code, languages[lang.value]) // languages.<insert language> to return html with markup
 }
 
 const langs = [
   {
-    label: 'None',
-    value: '',
+    label: 'CSS',
+    value: 'css',
   },
   {
-    label: 'HTML',
-    value: 'html',
-  },
-  {
-    label: 'Javascript',
+    label: 'Javascript / HTML',
     value: 'js',
   },
   {
@@ -57,6 +55,10 @@ const langs = [
   {
     label: 'Python',
     value: 'python',
+  },
+  {
+    label: 'C',
+    value: 'c',
   },
   {
     label: 'C#',
@@ -82,20 +84,29 @@ const langs = [
 </script>
 
 <style scoped lang="postcss">
+.code-block-input {
+  @apply border border-primary-1 rounded-md overflow-hidden;
+}
 .my-editor {
   /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
-  background: #2d2d2d;
+  @apply bg-primary-2 outline-none;
   color: #ccc;
 
   /* you must provide font-family font-size line-height. Example: */
   font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
-  font-size: 14px;
-  line-height: 1.5;
-  padding: 5px;
+  @apply text-[14px] leading-[1.5] p-[5px];
 }
 
 /* optional class for removing the outline */
-.prism-editor__textarea:focus {
-  outline: none;
+
+:deep(.prism-editor__textarea:focus) {
+  outline: none !important;
+}
+
+:deep(.prism-editor__textarea:focus-within) {
+  outline: none !important;
+}
+:deep(.prism-editor__textarea:focus-visible) {
+  outline: none !important;
 }
 </style>
