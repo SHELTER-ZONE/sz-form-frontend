@@ -6,7 +6,10 @@
       <section class="section-block">
         <p>內容</p>
         <hr class="divider" />
-        <DCTextEditor @update="handleContentUpdate" />
+        <DCTextEditor
+          @update="handleContentUpdate"
+          :preViewData="compactFormData.content"
+        />
       </section>
 
       <ImageInput class="section-block" @add="handleImagesUpdate" />
@@ -35,19 +38,30 @@ import CodeInput from './components/CodeInput.vue'
 import DCTextEditor from '@/components/DCTextEditor.vue'
 import Handlebars from 'handlebars'
 
-const template = Handlebars.compile('Name: {{name}}')
-console.log(Handlebars.compile('Name: {{name}}')({ name: 'Nils' }))
-
 const formData = reactive({
   content: '',
   images: [],
   codeBlocks: [],
 })
 
+Handlebars.registerHelper('code:', function (index: string) {
+  const codeBlock: any = formData.codeBlocks[Number(index) - 1]
+  if (codeBlock) return `\`\`\`${codeBlock.lang}\n${codeBlock.code}\n\`\`\``
+  return ''
+})
+
 const compactFormData = computed(() => ({
-  content: Handlebars.compile(formData.content)({ name: 'Nils' }),
+  content: compileContent(),
   imgs: formData.images.map((i) => i.ref),
 }))
+
+const compileContent = () => {
+  try {
+    return Handlebars.compile(formData.content)()
+  } catch (error) {
+    return formData.content
+  }
+}
 
 const handleContentUpdate = (content: string) => {
   formData.content = content

@@ -12,7 +12,11 @@
           :on-update:value="updateContent"
         />
       </n-tab-pane>
-      <n-tab-pane name="preview" tab="預覽"> 預覽 </n-tab-pane>
+      <n-tab-pane name="preview" tab="預覽">
+        <code>
+          <pre>{{ preViewData }}</pre>
+        </code>
+      </n-tab-pane>
     </n-tabs>
   </div>
 </template>
@@ -22,9 +26,12 @@ import { NTabs, NTabPane, NInput } from 'naive-ui/es'
 import { ref } from 'vue'
 
 const emit = defineEmits(['update'])
+defineProps({
+  preViewData: { type: [String, null], required: true },
+})
 const content = ref('')
 
-const updateContent = (value) => {
+const updateContent = (value: string) => {
   content.value = value
   emit('update', value)
 }
