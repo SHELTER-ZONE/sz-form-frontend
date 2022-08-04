@@ -1,18 +1,31 @@
 <template>
   <div class="code-block-input">
-    <n-select v-model:value="lang" :options="langs" />
-    <prism-editor
-      v-model="code"
-      class="my-editor"
-      :highlight="highlighter"
-      line-numbers
-    />
+    <div class="flex-1">
+      <div class="header">
+        <div class="index-badge">{{ index + 1 }}</div>
+        <n-select v-model:value="syncLang" :options="langs" />
+      </div>
+      <prism-editor
+        v-model="syncCode"
+        class="my-editor"
+        :highlight="highlighter"
+        line-numbers
+      />
+    </div>
+    <n-icon
+      class="cursor-pointer hover:text-[#63e2b7]"
+      size="20"
+      @click="$emit('remove', index)"
+    >
+      <close-icon />
+    </n-icon>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { NSelect } from 'naive-ui/es'
+import { ref, computed } from 'vue'
+import { Close as CloseIcon } from '@vicons/carbon'
+import { NSelect, NIcon } from 'naive-ui/es'
 // import Prism Editor
 import { PrismEditor } from 'vue-prism-editor'
 import 'vue-prism-editor/dist/prismeditor.min.css' // import the styles somewhere
@@ -32,11 +45,39 @@ import 'prismjs/components/prism-rust'
 import 'prismjs/components/prism-kotlin'
 import 'prismjs/themes/prism-tomorrow.css' // import syntax highlighting styles
 
-const code = ref('')
+const emit = defineEmits(['remove', 'update:code', 'update:lang'])
+
+const props = defineProps({
+  lang: { type: [String, null], required: true },
+  code: { type: [String, null], required: true },
+  index: {
+    type: Number,
+    default: 0,
+  },
+})
+
 const lang = ref('js')
 
+const syncCode = computed({
+  get() {
+    return props.code
+  },
+  set(value) {
+    return emit('update:code', value)
+  },
+})
+
+const syncLang = computed({
+  get() {
+    return props.lang
+  },
+  set(value) {
+    return emit('update:lang', value)
+  },
+})
+
 const highlighter = (code: string) => {
-  return highlight(code, languages[lang.value]) // languages.<insert language> to return html with markup
+  return highlight(code, languages[props.lang])
 }
 
 const langs = [
@@ -86,7 +127,17 @@ const langs = [
 <style scoped lang="postcss">
 .code-block-input {
   @apply border border-primary-1 rounded-md overflow-hidden;
+  @apply flex gap-[8px];
 }
+
+.header {
+  @apply flex;
+}
+
+.index-badge {
+  @apply bg-secondary-1 px-[10px] flex items-center justify-center text-primary-1;
+}
+
 .my-editor {
   /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
   @apply bg-primary-2 outline-none;
