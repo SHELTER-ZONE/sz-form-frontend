@@ -1,10 +1,14 @@
 <template>
-  <div class="flex justify-start items-center gap-x-8px gap-y-12px my-[12px]">
-    圖{{ imageIndex }}
+  <div class="sz-image">
+    圖{{ index + 1 }}
     <div class="flex-grow max-w-full">
-      <n-input v-model:value="imageUrl" size="large" placeholder="Input" />
+      <n-input v-model:value="syncModel" size="large" placeholder="圖片網址" />
     </div>
-    <n-icon class="cursor-pointer hover:text-[#63e2b7]" size="20" @click="close(id)">
+    <n-icon
+      class="cursor-pointer hover:text-[#63e2b7]"
+      size="20"
+      @click="$emit('remove', index)"
+    >
       <close-icon />
     </n-icon>
   </div>
@@ -13,19 +17,27 @@
 <script setup lang="ts">
 import { Close as CloseIcon } from '@vicons/carbon'
 import { NInput, NIcon } from 'naive-ui/es'
-import { ref } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
-  index: { type: Number, required: true},
-  id: { type: String, required: true },
-  close: { type: Function, required: true }
+  data: { type: [String, null], required: true },
+  index: { type: Number, required: true },
 })
 
-const imageIndex = ref(props.index + 1)
-const imageUrl = ref("")
+const emit = defineEmits(['remove', 'update:data'])
 
-defineExpose({ imageIndex, imageUrl })
+const syncModel = computed({
+  get() {
+    return props.data
+  },
+  set(value) {
+    return emit('update:data', value)
+  },
+})
 </script>
 
 <style scoped lang="postcss">
+.sz-image {
+  @apply flex justify-start items-center gap-x-[8px] gap-y-[12px] my-[12px];
+}
 </style>

@@ -9,7 +9,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/form',
     name: 'Form',
-    component: () => import('@/views/Form.vue'),
+    component: () => import('@/views/Form/Form.vue'),
   },
 ]
 
