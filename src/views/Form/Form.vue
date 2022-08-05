@@ -91,7 +91,9 @@ Handlebars.registerHelper('code:', function (index: string) {
 
 const compileContent = () => {
   try {
-    return Handlebars.compile(formData.content)()
+    const content = Handlebars.compile(formData.content)()
+    // const imgs = formData.images.map((i) => i.ref).join('\n')
+    return content
   } catch (error) {
     return formData.content
   }
