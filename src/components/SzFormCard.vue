@@ -4,7 +4,7 @@
       <n-grid-item class="heading-icon" span="1"> ㉿ </n-grid-item>
       <n-grid-item class="py-24px" span="3">
         <h3>{{ data.name }}</h3>
-        <p>left: 1d 2h</p>
+        <p v-if="data.expDate">left: 1d 2h</p>
       </n-grid-item>
     </n-grid>
   </router-link>

@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="text-left">
-      <FormInfo :formData="{}" />
+      <FormInfo :formData="formDetail" />
 
       <section class="section-block">
         <p>內容</p>
@@ -51,8 +51,17 @@ import CodeInput from './components/CodeInput.vue'
 import DCTextEditor from '@/components/DCTextEditor.vue'
 import Handlebars from 'handlebars'
 import { SubmitForm } from '@/api/form'
+import { useAppStore } from '@/store'
+import { find } from 'lodash-es'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
+const appStore = useAppStore()
 const message = useMessage()
+const formKey = computed(() => route.params.formKey)
+const formDetail = computed(() =>
+  find(appStore.formsList, { key: formKey.value })
+)
 const sendingForm = ref<boolean>(false)
 const formData = reactive({
   content: '',
@@ -114,7 +123,7 @@ const handleCodeBlocksUpdate = (codeBlocksList) => {
 const submitForm = async () => {
   sendingForm.value = true
   const [, err] = await SubmitForm({
-    formKey: 'l699qg0z',
+    formKey: formKey.value,
     ...compactFormData.value,
   })
   if (err) message.error(err)

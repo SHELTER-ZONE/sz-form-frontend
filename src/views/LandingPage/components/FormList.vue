@@ -3,14 +3,14 @@
     <div v-if="loading" class="mb-[20px]">
       <n-spin>
         <div class="flex flex-col gap-[12px]">
-          <n-skeleton width="100%" height="100px" />
-          <n-skeleton width="100%" height="100px" />
+          <n-skeleton width="100%" height="80px" />
+          <n-skeleton width="100%" height="80px" />
         </div>
       </n-spin>
     </div>
 
     <div v-if="formList.length && !loading">
-      <sz-card
+      <SzFormCard
         class="mt-0"
         v-for="form in chunkFormList[page - 1]"
         :key="form.key"
@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { NEmpty, NSpin, NSkeleton } from 'naive-ui/es'
-import SzCard from '@/components/SzCard.vue'
+import SzFormCard from '@/components/SzFormCard.vue'
 import Pagination from '@/components/Pagination.vue'
 
 import { chunk } from 'lodash-es'
