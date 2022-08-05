@@ -11,7 +11,8 @@ const handleSuccessRes = (response: AxiosResponse) => {
   return [response.data, null]
 }
 const handleErrorRes = (error: AxiosError) => {
-  return [null, error.response || error]
+  const errorData = error.response?.data
+  return [null, errorData || error]
 }
 
 // Res

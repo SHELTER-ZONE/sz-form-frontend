@@ -28,12 +28,12 @@ export const SubmitForm = async ({
   formKey,
   content,
   imgs,
-  userId,
-}: {
+}: // userId,
+{
   formKey: string
   content: string
   imgs: string[]
-  userId?: string
+  // userId?: string
 }) => {
   return await api({
     method: 'POST',
@@ -41,7 +41,7 @@ export const SubmitForm = async ({
     data: {
       content,
       imgs,
-      userId,
+      // userId,
     },
   })
 }

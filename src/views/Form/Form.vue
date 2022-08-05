@@ -33,6 +33,8 @@
         type="primary"
         size="large"
         :disabled="!canSubmit"
+        :loading="sendingForm"
+        @click="submitForm"
       >
         提交
       </n-button>
@@ -41,14 +43,17 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
-import { NButton } from 'naive-ui/es'
+import { ref, reactive, computed } from 'vue'
+import { NButton, useMessage } from 'naive-ui/es'
 import FormInfo from './components/FormInfo.vue'
 import ImageInput from './components/ImageInput.vue'
 import CodeInput from './components/CodeInput.vue'
 import DCTextEditor from '@/components/DCTextEditor.vue'
 import Handlebars from 'handlebars'
+import { SubmitForm } from '@/api/form'
 
+const message = useMessage()
+const sendingForm = ref<boolean>(false)
 const formData = reactive({
   content: '',
   images: [],
@@ -102,6 +107,16 @@ const handleImagesUpdate = (imagesList: string[]) => {
 
 const handleCodeBlocksUpdate = (codeBlocksList) => {
   formData.codeBlocks = codeBlocksList
+}
+
+const submitForm = async () => {
+  sendingForm.value = true
+  const [, err] = await SubmitForm({
+    formKey: 'l699qg0z',
+    ...compactFormData.value,
+  })
+  if (err) message.error(err)
+  sendingForm.value = false
 }
 </script>
 

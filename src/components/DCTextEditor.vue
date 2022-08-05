@@ -15,7 +15,7 @@
       <n-tab-pane name="preview" tab="預覽">
         <n-alert :show-icon="false">
           <code>
-            <pre>{{ preViewData }}</pre>
+            <pre class="min-h-[50px]">{{ preViewData }}</pre>
           </code>
         </n-alert>
       </n-tab-pane>
