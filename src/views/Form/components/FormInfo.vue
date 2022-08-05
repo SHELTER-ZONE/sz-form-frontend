@@ -4,9 +4,9 @@
       <router-link to="/">
         <n-icon :size="30" class="pt-[7px]"><ChevronLeft /></n-icon>
       </router-link>
-      SZ Form
+      {{ formData.name }}
     </h1>
-    <h2>{{ formData.name }}</h2>
+
     <p>{{ formData.description }}</p>
   </section>
 </template>

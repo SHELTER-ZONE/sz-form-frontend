@@ -6,14 +6,14 @@
         <p>SZ Form Description</p>
       </div>
       <div>
-        <h2>限時活動表單</h2>
+        <h2 class="text-left">限時活動表單</h2>
         <FormList
           :loading="appStore.formsLoading"
           :formList="appStore.eventForms"
         />
       </div>
       <div>
-        <h2>常駐活動表單</h2>
+        <h2 class="text-left">常駐活動表單</h2>
         <FormList
           :loading="appStore.formsLoading"
           :formList="appStore.staticForms"
