@@ -56,8 +56,6 @@ const props = defineProps({
   },
 })
 
-const lang = ref('js')
-
 const syncCode = computed({
   get() {
     return props.code
