@@ -13,16 +13,18 @@
         />
       </n-tab-pane>
       <n-tab-pane name="preview" tab="預覽">
-        <code>
-          <pre>{{ preViewData }}</pre>
-        </code>
+        <n-alert :show-icon="false">
+          <code>
+            <pre>{{ preViewData }}</pre>
+          </code>
+        </n-alert>
       </n-tab-pane>
     </n-tabs>
   </div>
 </template>
 
 <script setup lang="ts">
-import { NTabs, NTabPane, NInput } from 'naive-ui/es'
+import { NTabs, NTabPane, NInput, NAlert } from 'naive-ui/es'
 import { ref } from 'vue'
 
 const emit = defineEmits(['update'])

@@ -6,14 +6,24 @@
       <section class="section-block">
         <p>內容</p>
         <hr class="divider" />
+        <p>
+          編譯後字數:
+          <span
+            class="text-secondary-1"
+            :class="{ 'text-danger-1': contentWordCount >= maxWordCount }"
+          >
+            {{ contentWordCount }}
+          </span>
+          <span> / {{ maxWordCount }}</span>
+        </p>
         <DCTextEditor
           @update="handleContentUpdate"
           :preViewData="compactFormData.content"
         />
       </section>
 
-      <ImageInput class="section-block" @add="handleImagesUpdate" />
       <CodeInput class="section-block" @add="handleCodeBlocksUpdate" />
+      <ImageInput class="section-block" @add="handleImagesUpdate" />
 
       <n-button
         class="my-30px w-full"
@@ -22,6 +32,7 @@
         round
         type="primary"
         size="large"
+        :disabled="!canSubmit"
       >
         提交
       </n-button>
@@ -44,16 +55,34 @@ const formData = reactive({
   codeBlocks: [],
 })
 
-Handlebars.registerHelper('code:', function (index: string) {
-  const codeBlock: any = formData.codeBlocks[Number(index) - 1]
-  if (codeBlock) return `\`\`\`${codeBlock.lang}\n${codeBlock.code}\n\`\`\``
-  return ''
-})
+const minWordCount = 10
+const maxWordCount = 2000
 
 const compactFormData = computed(() => ({
   content: compileContent(),
   imgs: formData.images.map((i) => i.ref),
 }))
+
+const contentWordCount = computed(() => {
+  const content = compactFormData.value.content
+  if (!content) return 0
+  return content.length
+})
+
+const canSubmit = computed(() => {
+  if (contentWordCount.value < minWordCount) return false
+  if (contentWordCount.value >= maxWordCount) return false
+  return true
+})
+
+Handlebars.registerHelper('code:', function (index: string) {
+  const codeBlock: any = formData.codeBlocks[Number(index) - 1]
+  if (codeBlock) {
+    if (codeBlock.code)
+      return `\`\`\`${codeBlock.lang}\n${codeBlock.code}\n\`\`\``
+  }
+  return ''
+})
 
 const compileContent = () => {
   try {
