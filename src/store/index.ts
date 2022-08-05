@@ -1,13 +1,18 @@
 import { defineStore } from 'pinia'
-import { GetFormList } from '@/api/form'
+import { GetFormList, GetFormCount } from '@/api/form'
 
 export const useAppStore = defineStore('app', {
   state: (): AppStoreState => ({
     formsList: [],
     formsCount: 0,
+    formsLoading: false,
   }),
   actions: {
-    async getFormsCount() {},
+    async getFormsCount() {
+      const [res, err] = await GetFormCount()
+      if (err) return err
+      this.formsCount = res
+    },
     async getFormsList() {
       let lastKey = ''
       const limit = 20

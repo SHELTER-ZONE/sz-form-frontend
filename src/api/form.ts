@@ -17,6 +17,13 @@ export const GetFormList = async ({
   })
 }
 
+export const GetFormCount = async () => {
+  return await api({
+    method: 'GET',
+    url: `/forms/count`,
+  })
+}
+
 export const FindForm = async ({ formKey }: { formKey: string }) => {
   return await api({
     method: 'GET',

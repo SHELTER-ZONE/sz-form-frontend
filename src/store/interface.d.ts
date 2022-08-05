@@ -10,5 +10,6 @@ interface Form {
 interface AppStoreState {
   formsList: Form[]
   formsCount: number
+  formsLoading: boolean
 }
 s
