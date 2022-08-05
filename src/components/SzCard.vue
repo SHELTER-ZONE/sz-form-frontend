@@ -1,11 +1,9 @@
 <template>
-  <router-link :to="{ name: 'Form' }">
+  <router-link :to="{ name: 'Form', params: { formKey: data.key } }">
     <n-grid class="card common-transition" x:gap="12" :cols="4">
-      <n-grid-item class="heading-icon" span="1">
-        ㉿
-      </n-grid-item>
+      <n-grid-item class="heading-icon" span="1"> ㉿ </n-grid-item>
       <n-grid-item class="py-24px" span="3">
-        <h3>1day-1knowledge</h3>
+        <h3>{{ data.name }}</h3>
         <p>left: 1d 2h</p>
       </n-grid-item>
     </n-grid>
@@ -14,6 +12,13 @@
 
 <script setup lang="ts">
 import { NGrid, NGridItem } from 'naive-ui/es'
+
+defineProps({
+  data: {
+    type: Object,
+    default: () => ({}),
+  },
+})
 </script>
 
 <style scoped lang="postcss">

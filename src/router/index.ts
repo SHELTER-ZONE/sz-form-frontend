@@ -4,10 +4,10 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'LandingPage',
-    component: () => import('@/views/LandingPage.vue'),
+    component: () => import('@/views/LandingPage/LandingPage.vue'),
   },
   {
-    path: '/form',
+    path: '/form/:formKey',
     name: 'Form',
     component: () => import('@/views/Form/Form.vue'),
   },
