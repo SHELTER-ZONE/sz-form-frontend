@@ -11,10 +11,10 @@
 
     <div v-if="formList.length && !loading">
       <SzFormCard
-        class="mt-0"
         v-for="form in chunkFormList[page - 1]"
         :key="form.key"
         :data="form"
+        class="mt-0"
       />
     </div>
     <n-empty
@@ -34,7 +34,7 @@ import Pagination from '@/components/Pagination.vue'
 
 import { chunk } from 'lodash-es'
 
-const page = ref<Number>(1)
+const page: any = ref<Number>(1)
 const props = defineProps({
   loading: {
     type: Boolean,
@@ -50,7 +50,7 @@ const props = defineProps({
   },
 })
 
-const chunkFormList = computed(() => chunk(props.formList, props.perPage))
+const chunkFormList: any = computed(() => chunk(props.formList, props.perPage))
 const totalPages = computed(() =>
   Math.ceil(props.formList.length / props.perPage)
 )

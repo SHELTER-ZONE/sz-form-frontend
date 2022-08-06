@@ -25,7 +25,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { NTabs, NTabPane, NInput, NAlert, NScrollbar } from 'naive-ui/es'
 import { ref } from 'vue'
 
@@ -35,7 +35,7 @@ defineProps({
 })
 const content = ref('')
 
-const updateContent = (value: string) => {
+const updateContent = (value) => {
   content.value = value
   emit('update', value)
 }

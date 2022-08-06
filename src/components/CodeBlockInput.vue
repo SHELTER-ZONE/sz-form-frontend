@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref, computed } from 'vue'
 import { Close as CloseIcon } from '@vicons/carbon'
 import { NSelect, NIcon } from 'naive-ui/es'
@@ -74,7 +74,7 @@ const syncLang = computed({
   },
 })
 
-const highlighter = (code: string) => {
+const highlighter = (code) => {
   return highlight(code, languages[props.lang])
 }
 

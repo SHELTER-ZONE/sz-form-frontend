@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { Close as CloseIcon } from '@vicons/carbon'
 import { NInput, NIcon } from 'naive-ui/es'
 import { computed } from 'vue'

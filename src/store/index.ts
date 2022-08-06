@@ -9,7 +9,7 @@ export const useAppStore = defineStore('app', {
   }),
   actions: {
     async getFormsCount() {
-      const [res, err] = await GetFormCount()
+      const [res, err]: any = await GetFormCount()
       if (err) return err
       this.formsCount = res
     },
@@ -18,7 +18,7 @@ export const useAppStore = defineStore('app', {
       const limit = 20
       while (this.formsList.length < this.formsCount) {
         const payload = lastKey ? { last: lastKey, limit } : { limit }
-        const [res, err] = await GetFormList(payload)
+        const [res, err]: any = await GetFormList(payload)
         if (err) return err
         lastKey = res[res.length - 1].key
         this.formsList.push(...res)

@@ -11,8 +11,8 @@
 
           <DCTextEditor
             class="mt-[20px]"
-            @update="handleContentUpdate"
             :preViewData="compactFormData.content"
+            @update="handleContentUpdate"
           />
           <p>
             編譯後字數:
@@ -57,22 +57,21 @@ import CodeInput from './components/CodeInput.vue'
 import DCTextEditor from '@/components/DCTextEditor.vue'
 import Handlebars from 'handlebars'
 import { SubmitForm, FindForm } from '@/api/form'
-import { useAppStore } from '@/store'
-import { find } from 'lodash-es'
+// import { useAppStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
-const appStore = useAppStore()
+// const appStore = useAppStore()
 const message = useMessage()
-const formKey = computed(() => route.params.formKey)
+const formKey = computed(() => route.params.formKey || '')
 // const formDetail = computed(() =>
 //   find(appStore.formsList, { key: formKey.value })
 // )
 const pageLoading = ref(true)
 const formDetail = ref({})
 const sendingForm = ref<boolean>(false)
-const formData = reactive({
+const formData: any = reactive({
   content: '',
   images: [],
   codeBlocks: [],
@@ -83,7 +82,7 @@ const maxWordCount = 2000
 
 const compactFormData = computed(() => ({
   content: compileContent(),
-  imgs: formData.images.map((i) => i.ref),
+  imgs: formData.images.map((i: any) => i.ref),
 }))
 
 const contentWordCount = computed(() => {
@@ -109,8 +108,8 @@ Handlebars.registerHelper('code:', function (index: string) {
 
 const compileContent = () => {
   try {
-    const content = Handlebars.compile(formData.content)()
-    const imgs = formData.images.map((i) => i.ref).join('\n')
+    const content = Handlebars.compile(formData.content)({})
+    const imgs = formData.images.map((i: any) => i.ref).join('\n')
     if (imgs) return `${content}\n${imgs}`
     return content
   } catch (error) {
@@ -126,20 +125,20 @@ const handleImagesUpdate = (imagesList: string[]) => {
   formData.images = imagesList
 }
 
-const handleCodeBlocksUpdate = (codeBlocksList) => {
+const handleCodeBlocksUpdate = (codeBlocksList: any[]) => {
   formData.codeBlocks = codeBlocksList
 }
 
 const findForm = async () => {
-  const [res, err] = await FindForm({ formKey: formKey.value })
+  const [res, err]: any = await FindForm({ formKey: formKey.value as string })
   if (err) return message.error(err)
   formDetail.value = res
 }
 
 const submitForm = async () => {
   sendingForm.value = true
-  const [, err] = await SubmitForm({
-    formKey: formKey.value,
+  const [, err]: any = await SubmitForm({
+    formKey: formKey.value as string,
     ...compactFormData.value,
   })
   if (err) message.error(err)
