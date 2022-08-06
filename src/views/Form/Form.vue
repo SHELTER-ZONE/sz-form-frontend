@@ -3,7 +3,6 @@
     <n-spin :show="pageLoading">
       <div class="text-left">
         <FormInfo :formData="formDetail" />
-
         <section class="section-block">
           <p>內容</p>
           <hr class="divider" />
@@ -30,6 +29,7 @@
         <ImageInput class="section-block" @add="handleImagesUpdate" />
 
         <n-button
+          v-if="!submitCooling && countDone"
           class="my-30px w-full"
           strong
           tertiary
@@ -42,6 +42,14 @@
         >
           提交
         </n-button>
+
+        <CoolDownButton
+          v-if="submitCooling && !countDone"
+          :seconds="(coolDownLeft('form') as number)"
+          btnText="下一步"
+          :active="true"
+          @done=";(countDone = true), (submitCooling = false)"
+        />
       </div>
     </n-spin>
   </main>
@@ -50,6 +58,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { NButton, useMessage, NSpin } from 'naive-ui/es'
+import CoolDownButton from '@/components/CoolDownButton.vue'
 import FormInfo from './components/FormInfo.vue'
 import Notice from './components/Notice.vue'
 import ImageInput from './components/ImageInput.vue'
@@ -57,17 +66,17 @@ import CodeInput from './components/CodeInput.vue'
 import DCTextEditor from '@/components/DCTextEditor.vue'
 import Handlebars from 'handlebars'
 import { SubmitForm, FindForm } from '@/api/form'
-// import { useAppStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
+import { useCoolDown } from '@/use/coolDown'
 
 const route = useRoute()
 const router = useRouter()
-// const appStore = useAppStore()
 const message = useMessage()
+const { inCoolDown, startCoolDown, coolDownLeft } = useCoolDown()
 const formKey = computed(() => route.params.formKey || '')
-// const formDetail = computed(() =>
-//   find(appStore.formsList, { key: formKey.value })
-// )
+
+const submitCooling = ref(false)
+const countDone: any = ref<boolean>(true)
 const pageLoading = ref(true)
 const formDetail = ref({})
 const sendingForm = ref<boolean>(false)
@@ -143,13 +152,17 @@ const submitForm = async () => {
   })
   if (err) message.error(err)
   sendingForm.value = false
-
+  startCoolDown('form', 1)
   router.push({ name: 'LandingPage' })
 }
 
 onMounted(async () => {
   pageLoading.value = true
   await findForm()
+  if (inCoolDown('form')) {
+    countDone.value = false
+    submitCooling.value = true
+  }
   pageLoading.value = false
 })
 </script>
