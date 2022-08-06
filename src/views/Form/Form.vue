@@ -152,7 +152,7 @@ const submitForm = async () => {
   })
   if (err) message.error(err)
   sendingForm.value = false
-  startCoolDown('form', 1)
+  startCoolDown('form', 5)
   router.push({ name: 'LandingPage' })
 }
 
