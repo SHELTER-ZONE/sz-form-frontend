@@ -1,7 +1,7 @@
 <template>
   <div class="dc-editor">
     <n-tabs type="segment">
-      <n-tab-pane name="edit" tab="編輯">
+      <n-tab-pane name="edit" tab="訊息編輯">
         <n-input
           v-model:value="content"
           type="textarea"
@@ -12,10 +12,12 @@
           :on-update:value="updateContent"
         />
       </n-tab-pane>
-      <n-tab-pane name="preview" tab="預覽">
+      <n-tab-pane name="preview" tab="編譯預覽">
         <n-alert :show-icon="false">
           <code>
-            <pre class="min-h-[50px]">{{ preViewData }}</pre>
+            <n-scrollbar x-scrollable>
+              <pre class="min-h-[50px]">{{ preViewData }}</pre>
+            </n-scrollbar>
           </code>
         </n-alert>
       </n-tab-pane>
@@ -24,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { NTabs, NTabPane, NInput, NAlert } from 'naive-ui/es'
+import { NTabs, NTabPane, NInput, NAlert, NScrollbar } from 'naive-ui/es'
 import { ref } from 'vue'
 
 const emit = defineEmits(['update'])

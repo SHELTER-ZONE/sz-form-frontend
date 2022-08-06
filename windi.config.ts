@@ -10,6 +10,10 @@ export default defineConfig({
 
         'danger-1': '#eb345f',
       },
+      screens: {
+        tablet: '375px',
+        md: '475px',
+      },
     },
   },
 })

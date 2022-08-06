@@ -3,7 +3,7 @@
     <div>
       <div class="text-left">
         <h1>SZ Form</h1>
-        <p>SZ Form Description</p>
+        <!-- <p>SZ Form Description</p> -->
       </div>
       <div>
         <h2 class="text-left">限時活動表單</h2>
